@@ -14,7 +14,7 @@ from trackmac.models import Application, NormalTrackRecord, WebTrackRecord, Bloc
 class TimeTracking(object):
     def __init__(self, **kwargs):
         """
-         basic config
+        basic config
         """
 
     def start(self):

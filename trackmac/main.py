@@ -188,7 +188,10 @@ def block(ctx, tt, app_name, delete):
 
     \b
     $ tm block Google\ Chrome
-    Applocation:Google Chrome blocked.
+    Applocation Google Chrome blocked.
+
+    $ tm block -d Google\ Chrome
+    Applocation Google Chrome unblocked.
     """
     name = delete or app_name
     if name:

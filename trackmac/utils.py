@@ -12,7 +12,7 @@ import trackmac.config
 def load_or_unload_daemon(cmd):
     """
     load or unload daemon by using command :launchctl load ... / launchctl unload ...
-    can also use objc calls
+    Can also use objc calls
     """
     p = Popen(['launchctl', cmd, trackmac.config.TRACK_PLIST_NAME], cwd=trackmac.config.USER_LAUNCHAGENTS_DIR,
               stdin=PIPE, stdout=PIPE, stderr=PIPE)
@@ -21,6 +21,9 @@ def load_or_unload_daemon(cmd):
 
 
 def create_dir():
+    """
+    creating dir to save log and sqlite dbfile.
+    """
     if not os.path.exists(trackmac.config.TRACK_DIR):
         os.makedirs(trackmac.config.TRACK_DIR)
         open(trackmac.config.TRACK_LOG_FILE, 'a').close()
@@ -28,6 +31,9 @@ def create_dir():
 
 
 def create_database():
+    """
+    create tables.
+    """
     if not os.path.isfile(trackmac.config.TRACK_DB_FILE):
         db = peewee.SqliteDatabase(trackmac.config.TRACK_DB_FILE)
         db.create_tables(
@@ -37,6 +43,9 @@ def create_database():
 
 
 def symlink_and_load_plist():
+    """
+    symlink plist and load at once.
+    """
     cur_dir = os.path.abspath(os.path.dirname(__file__))
     src = os.path.join(cur_dir, trackmac.config.TRACK_PLIST_NAME)
     dest = os.path.join(trackmac.config.USER_LAUNCHAGENTS_DIR, trackmac.config.TRACK_PLIST_NAME)
@@ -49,10 +58,11 @@ def symlink_and_load_plist():
         load_or_unload_daemon('load')
 
 
-def get_start_time_for_period(period):
-    # Using now() from datetime instead of arrow for mocking compatibility.
+def get_start_date_for_period(period):
+    """
+    get start date for different params.
+    """
     now = datetime.datetime.now()
-
     day = now.day
     month = now.month
     year = now.year
@@ -72,6 +82,9 @@ def get_start_time_for_period(period):
 
 
 def get_progress(iteration, total, prefix='', suffix='', barLength=30):
+    """
+    get progress bar for showing.
+    """
     percents = "{0:.1f}".format(100 * (iteration / float(total)))
     filledLength = int(round(barLength * iteration / float(total)))
     bar = '█' * filledLength
@@ -80,7 +93,7 @@ def get_progress(iteration, total, prefix='', suffix='', barLength=30):
 
 def format_timedelta(seconds):
     """
-    Return a string roughly representing a timedelta.
+    return a string roughly representing a timedelta.
     """
     neg = seconds < 0
     seconds = abs(seconds)
@@ -103,6 +116,9 @@ def format_timedelta(seconds):
 
 
 def style(name, element):
+    """
+    different styles for showing.
+    """
     def _style_tags(tags):
         if not tags:
             return ''
@@ -143,6 +159,9 @@ def is_chinese(uchar):
 
 
 def fill_text_to_print_width(text, width):
+    """
+    for aligning...
+    """
     stext = str(text)
     utext = stext.decode("utf-8")
     cn_count = 0

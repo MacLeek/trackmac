@@ -17,6 +17,9 @@ class Application(BaseModel):
 
 
 class NormalTrackRecord(BaseModel):
+    """
+    Application records except for web browsers
+    """
     app = ForeignKeyField(Application, related_name='normal_records')
     start_datetime = DateTimeField(default=datetime.datetime.now)
     end_datetime = DateTimeField(null=True)
@@ -25,6 +28,9 @@ class NormalTrackRecord(BaseModel):
 
 
 class WebTrackRecord(BaseModel):
+    """
+    Web browsers records
+    """
     app = ForeignKeyField(Application, related_name='web_records')
     start_datetime = DateTimeField(default=datetime.datetime.now)
     end_datetime = DateTimeField(null=True)
@@ -35,4 +41,7 @@ class WebTrackRecord(BaseModel):
 
 
 class BlockedApplication(BaseModel):
+    """
+    App not track
+    """
     name = CharField()
