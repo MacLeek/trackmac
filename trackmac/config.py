@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+import os
+
+TRACK_DIR = os.path.expanduser('~/.trackmac/')
+TRACK_DB_FILE = TRACK_DIR + 'track.db'
+TRACK_LOG_FILE = TRACK_DIR + 'track.log'
+TRACK_PLIST_NAME = 'com.github.macleek.trackmac.plist'
+USER_LAUNCHAGENTS_DIR = os.path.expanduser('~/Library/LaunchAgents')
+BROWSERS = {
+    'Google Chrome': {
+        'bundle_id': 'com.google.Chrome',
+        'tab': 'activeTab',
+        'title': 'title',
+        'url': 'URL'
+    },
+    'Safari': {
+        'bundle_id': 'com.apple.Safari',
+        'tab': 'currentTab',
+        'title': 'name',
+        'url': 'URL'
+    }
+}
