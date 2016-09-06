@@ -70,15 +70,15 @@ def start(ctx):
               mutually_exclusive=_SHORTCUT_OPTIONS,
               help="The date at which the report should stop (inclusive).Format:%Y-%m-%d")
 @click.option('-w', '--week', cls=MutuallyExclusiveOption, type=str,
-              flag_value=trackmac.utils.get_start_time_for_period('week'),
+              flag_value=trackmac.utils.get_start_date_for_period('week'),
               mutually_exclusive=['day', 'month', 'year'],
               help='Reports application usage for current week.')
 @click.option('-m', '--month', cls=MutuallyExclusiveOption, type=str,
-              flag_value=trackmac.utils.get_start_time_for_period('month'),
+              flag_value=trackmac.utils.get_start_date_for_period('month'),
               mutually_exclusive=['week', 'day', 'year'],
               help='Reports application usage for current month')
 @click.option('-d', '--day', cls=MutuallyExclusiveOption, type=str,
-              flag_value=trackmac.utils.get_start_time_for_period('day'),
+              flag_value=trackmac.utils.get_start_date_for_period('day'),
               mutually_exclusive=['week', 'month', 'year'],
               help='Reports application usage for yesterday.')
 @click.option('-n', '--num', type=int, default=10,

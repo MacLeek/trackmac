@@ -3,9 +3,6 @@ import os
 import datetime
 from subprocess import Popen, PIPE
 
-import peewee
-
-import trackmac.models
 import trackmac.config
 
 
@@ -34,6 +31,8 @@ def create_database():
     """
     create tables.
     """
+    import peewee
+    import trackmac.models
     if not os.path.isfile(trackmac.config.TRACK_DB_FILE):
         db = peewee.SqliteDatabase(trackmac.config.TRACK_DB_FILE)
         db.create_tables(
