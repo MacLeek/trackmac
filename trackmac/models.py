@@ -22,7 +22,7 @@ class NormalTrackRecord(BaseModel):
     """
     app = ForeignKeyField(Application, related_name='normal_records')
     start_datetime = DateTimeField(default=datetime.datetime.now)
-    end_datetime = DateTimeField(null=True)
+    end_datetime = DateTimeField(default=datetime.datetime.now)
     duration = IntegerField(default=1)
     is_current = BooleanField(default=True)
 
@@ -33,7 +33,7 @@ class WebTrackRecord(BaseModel):
     """
     app = ForeignKeyField(Application, related_name='web_records')
     start_datetime = DateTimeField(default=datetime.datetime.now)
-    end_datetime = DateTimeField(null=True)
+    end_datetime = DateTimeField(default=datetime.datetime.now)
     duration = IntegerField(default=1)
     title = CharField(null=True)  # can be null when web page not fully loaded
     url = CharField()

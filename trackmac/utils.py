@@ -43,7 +43,7 @@ def remove_all_files():
     shutil.rmtree(trackmac.config.TRACK_DIR)
     print 'Removing {}'.format(trackmac.config.TRACK_DIR)
     plist_file = os.path.join(trackmac.config.USER_LAUNCHAGENTS_DIR, trackmac.config.TRACK_PLIST_NAME)
-    print 'Removing {}'.foramt(plist_file)
+    print 'Removing {}'.format(plist_file)
     os.remove(plist_file)
 
 

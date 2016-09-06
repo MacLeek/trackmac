@@ -32,11 +32,14 @@ class TimeTracking(object):
                             record_set = NormalTrackRecord.select().where(NormalTrackRecord.is_current == True)
                             if record_set.exists():
                                 old_rec = record_set[0]
-                                old_rec.end_datetime = datetime.datetime.now()
-                                old_rec.duration = (old_rec.end_datetime - old_rec.start_datetime).total_seconds()
-                                if old_rec.app != cur_app:
+                                now = datetime.datetime.now()
+                                # time delay or stopped for some time (1.5s is very inaccurate.)
+                                if old_rec.app != cur_app or (now - old_rec.end_datetime).total_seconds() > 1.5:
                                     old_rec.is_current = False
                                     NormalTrackRecord(app=cur_app).save()
+                                else:
+                                    old_rec.end_datetime = now
+                                    old_rec.duration = (old_rec.end_datetime - old_rec.start_datetime).total_seconds()
                                 old_rec.save()
                             else:
                                 NormalTrackRecord(app=cur_app).save()
