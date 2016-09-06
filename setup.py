@@ -47,5 +47,5 @@ setup(
             'trackmac_service = trackmac.app:main',
         ]
     },
-    # cmdclass={'install': PostInstallCommand},
+    cmdclass={'install': PostInstallCommand},
 )
