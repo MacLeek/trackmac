@@ -41,6 +41,36 @@ def cli(ctx):
 
 @cli.command()
 @click.pass_context
+def setup(ctx):
+    """
+    Unload the track daemon mannualy.
+    """
+    trackmac.utils.create_dir()
+    trackmac.utils.create_database()
+    trackmac.utils.symlink_and_load_plist()
+    click.echo('Done.')
+
+
+def abort_if_false(ctx, param, value):
+    if not value:
+        ctx.abort()
+
+
+@cli.command()
+@click.option('--yes', is_flag=True, callback=abort_if_false,
+              expose_value=False,
+              prompt='Are you sure you want to delete trackmac data folder?')
+@click.pass_context
+def drop(ctx):
+    """
+    Unload the track daemon mannualy.
+    """
+    trackmac.utils.remove_all_files()
+    click.echo('Done.')
+
+
+@cli.command()
+@click.pass_context
 def stop(ctx):
     """
     Unload the track daemon mannualy.
@@ -54,6 +84,9 @@ def start(ctx):
     """
     Load the track daemon mannualy.
     """
+    if not trackmac.utils.has_set_up():
+        click.echo(trackmac.utils.style('error', 'Could not find db or plist file.Run `tm setup` first.\n'))
+        ctx.abort()
     click.echo(trackmac.utils.load_or_unload_daemon('load'))
 
 
@@ -117,6 +150,10 @@ def list(ctx, tt, web, start_, end_, week, month, day, num, tags, output):
     Successfully written to /position/to/trackdata.json
 
     """
+    if not trackmac.utils.has_set_up():
+        click.echo(trackmac.utils.style('error', 'Could not find db or plist file.Run `tm setup` first.\n'))
+        ctx.abort()
+
     if tt.is_not_running:
         click.echo(trackmac.utils.style('error', 'Warning:Trackmac daemon not running.Run `tm start` first.\n'))
 

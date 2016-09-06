@@ -1,8 +1,4 @@
 from setuptools import setup
-from setuptools.command.install import install
-
-from trackmac.utils import create_dir, create_database, symlink_and_load_plist
-
 
 def parse_requirements(requirements, ignore=('setuptools',)):
     """Read dependencies from requirements file (with version numbers if any)
@@ -23,14 +19,6 @@ def parse_requirements(requirements, ignore=('setuptools',)):
         return packages
 
 
-class PostInstallCommand(install):
-    def run(self):
-        install.run(self)
-        create_dir()
-        create_database()
-        symlink_and_load_plist()
-
-
 setup(
     name='trackmac',
     version='0.0.1',
@@ -39,6 +27,7 @@ setup(
     author='MacLeek',
     author_email='inaoqi@gmail.com',
     packages=['trackmac'],
+    include_package_data=True,
     install_requires=parse_requirements('requirements.txt'),
     license='MIT',
     entry_points={
@@ -47,5 +36,4 @@ setup(
             'trackmac_service = trackmac.app:main',
         ]
     },
-    cmdclass={'install': PostInstallCommand},
 )

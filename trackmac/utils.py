@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import shutil
 import datetime
 from subprocess import Popen, PIPE
 
@@ -17,6 +18,14 @@ def load_or_unload_daemon(cmd):
     return err.strip() or 'trackmac daemon {}ed.'.format(cmd)
 
 
+def has_set_up():
+    """
+    if  has been set up
+    """
+    plist_file = os.path.join(trackmac.config.USER_LAUNCHAGENTS_DIR, trackmac.config.TRACK_PLIST_NAME)
+    return os.path.exists(trackmac.config.TRACK_DIR) and os.path.exists(plist_file)
+
+
 def create_dir():
     """
     creating dir to save log and sqlite dbfile.
@@ -25,6 +34,17 @@ def create_dir():
         os.makedirs(trackmac.config.TRACK_DIR)
         open(trackmac.config.TRACK_LOG_FILE, 'a').close()
         print('writing {}'.format(trackmac.config.TRACK_LOG_FILE))
+
+
+def remove_all_files():
+    """
+    remove save log, sqlite dbfile and .plist.
+    """
+    shutil.rmtree(trackmac.config.TRACK_DIR)
+    print 'Removing {}'.format(trackmac.config.TRACK_DIR)
+    plist_file = os.path.join(trackmac.config.USER_LAUNCHAGENTS_DIR, trackmac.config.TRACK_PLIST_NAME)
+    print 'Removing {}'.foramt(plist_file)
+    os.remove(plist_file)
 
 
 def create_database():
