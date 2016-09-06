@@ -233,9 +233,9 @@ def block(ctx, tt, app_name, delete):
     name = delete or app_name
     if name:
         if tt.block(name, delete is None):
-            click.echo(trackmac.utils.style('time', 'Successfully {}blocked {}.'.format('un'if delete else'', name)))
+            click.echo(trackmac.utils.style('time', u'Successfully {}blocked {}.'.format('un'if delete else'', name)))
         else:
-            click.echo(trackmac.utils.style('error', 'Appication {} not found.'.format(name)))
+            click.echo(trackmac.utils.style('error', u'Appication {} not found.'.format(name)))
     else:
         click.echo(u"\tBlocked applications:\n \t\t[{apps}]".format(apps=trackmac.utils.style('project', ",".join(tt.black_list))))
 
