@@ -1,11 +1,12 @@
-
-|Build Status| |PyPI Latest Version|
+Trackmac
+-----------
 
 Trackmac is a command line tool for built for OS X users to track the time spent
 on every application.It can also track the websites you visited through
 Chrome or Safari(will add support for more browers soon) every day.
 
 Screenshot here
+
 .. image:: https://raw.githubusercontent.com/MacLeek/trackmac/master/screen.gif
 
 
