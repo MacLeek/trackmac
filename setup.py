@@ -1,4 +1,20 @@
 from setuptools import setup
+from setuptools.command.install import install
+
+from trackmac.utils import generate_plist
+from trackmac.config import TRACK_SCRIPT, TRACK_DAEMON
+
+
+class PostInstallCommand(install):
+    """Post-installation for installation mode."""
+
+    def run(self):
+        """
+        should generate plist file first
+        """
+        generate_plist(self.install_scripts)
+        install.do_egg_install(self)
+
 
 def parse_requirements(requirements, ignore=('setuptools',)):
     """Read dependencies from requirements file (with version numbers if any)
@@ -32,8 +48,11 @@ setup(
     license='MIT',
     entry_points={
         'console_scripts': [
-            'tm = trackmac.main:cli',
-            'trackmac_service = trackmac.app:main',
+            '{} = trackmac.main:cli'.format(TRACK_SCRIPT),
+            '{} = trackmac.app:main'.format(TRACK_DAEMON),
         ]
     },
+    cmdclass={
+        'install': PostInstallCommand,
+    }
 )

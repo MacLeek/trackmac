@@ -8,6 +8,31 @@ from subprocess import Popen, PIPE
 import trackmac.config
 
 
+def generate_plist(install_scripts_dir):
+    """
+    generate a plist file under current folder
+    """
+    cur_dir = os.path.abspath(os.path.dirname(__file__))
+    plist_file = os.path.join(cur_dir, trackmac.config.TRACK_PLIST_NAME)
+    with open(plist_file, 'w') as f:
+        f.write("<?xml version=""1.0"" encoding=""UTF-8""?>\n")
+        f.write("<!DOCTYPE plist PUBLIC ""-//Apple//DTD PLIST 1.0//EN"" ""http://www.apple.com/DTDs/PropertyList-1.0.dtd"">\n")
+        f.write("<plist version=""1.0"">\n")
+        f.write("    <dict>\n")
+        f.write("        <key>Label</key>\n")
+        f.write("        <string>{}</string>\n".format(trackmac.config.TRACK_PLIST_NAME[:-6]))
+        f.write("        <key>ProgramArguments</key>\n")
+        f.write("        <array>\n")
+        f.write("        <string>{}/{}</string>\n".format(install_scripts_dir, trackmac.config.TRACK_DAEMON))
+        f.write("        </array>\n")
+        f.write("        <key>KeepAlive</key>\n")
+        f.write("        <true/>\n")
+        f.write("        <key>RunAtLoad</key>\n")
+        f.write("        <true/>\n")
+        f.write("   </dict>\n")
+        f.write("</plist>\n")
+
+
 def load_or_unload_daemon(cmd):
     """
     load or unload daemon by using command :launchctl load ... / launchctl unload ...

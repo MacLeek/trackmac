@@ -115,7 +115,7 @@ def start(ctx):
               mutually_exclusive=['week', 'month', 'year'],
               help='Reports application usage for yesterday.')
 @click.option('-n', '--num', type=int, default=10,
-              help='Reports application usage for the provided days.')
+              help='Only show top n applications(default to 10).')
 @click.option('-T', '--tags', 'tags', is_flag=True,
               help="Reports application usage group by tags")
 @click.option('-O', '--output',

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
 
+TRACK_SCRIPT = 'tm'
+TRACK_DAEMON = 'trackmac_service'
 TRACK_DIR = os.path.expanduser('~/Library/Application Support/com.github.macleek.trackmac/')
 TRACK_DB_FILE = TRACK_DIR + 'track.db'
 TRACK_LOG_FILE = TRACK_DIR + 'track.log'

@@ -29,6 +29,11 @@ or
   $ git clone https://github.com/MacLeek/trackmac && cd trackmac && python setup.py install
 
 
+Note:
+
+If you are using virtual environment to install, you should use `$VIRTUAL_ENV/bin/tm`
+instead of `tm` or simply add it to your environment PATH.
+
 Usage
 ~~~~~
 
