@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 import os
 import shutil
 import datetime
@@ -181,10 +182,8 @@ def fill_text_to_print_width(text, width):
     """
     for aligning...
     """
-    stext = str(text)
-    utext = stext.decode("utf-8")
     cn_count = 0
-    for u in utext:
+    for u in text:
         if is_chinese(u):
             cn_count += 1
-    return " " * (width - cn_count - len(utext)) + stext
+    return " " * (width - cn_count - len(text)) + text

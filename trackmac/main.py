@@ -197,13 +197,13 @@ def list(ctx, tt, web, start_, end_, week, month, day, num, tags, output):
     else:
         click.echo(trackmac.utils.style('date', "\t" + trackmac.utils.fill_text_to_print_width(
             start_.strftime("%Y %b %d") + " - " + end.strftime("%Y %b %d"), max_len + 22)))
-        click.echo(trackmac.utils.style('date', "\t" + trackmac.utils.fill_text_to_print_width("─" * 29, max_len + 24)))
+        click.echo(trackmac.utils.style('date', "\t" + trackmac.utils.fill_text_to_print_width(u"─" * 29, max_len + 24)))
         total_time = sum(r['duration'] for r in records)
         for rec in records:
-            click.echo("\t{project} {time} {percentage}".format(
+            click.echo(u"\t{project} {time} {percentage}".format(
                 time=trackmac.utils.style('time', '{:>11}'.format(trackmac.utils.format_timedelta(rec['duration']))),
                 project=trackmac.utils.style(
-                    'project', trackmac.utils.fill_text_to_print_width((rec[name] or 'Others').encode("utf8"), max_len)
+                    'project', trackmac.utils.fill_text_to_print_width((rec[name] or 'Others'), max_len)
                 ),
                 percentage=trackmac.utils.style('tag', trackmac.utils.get_progress(rec['duration'], total_time))
             ))
@@ -241,7 +241,7 @@ def block(ctx, tt, app_name, delete):
 
 
 @cli.command()
-@click.option('-a', '--add', 'param', nargs=2, type=unicode,
+@click.option('-a', '--add', 'param', nargs=2, type=click.STRING,
               help='the tag to add', required=False)
 @click.pass_obj
 @click.pass_context

@@ -73,10 +73,10 @@ class TimeTracking(object):
         get all application records from start to end group by `app_name` or `tag_name`
         """
         group_by_field = getattr(Application, group_by_field)
-        records_n = NormalTrackRecord.select(fn.SUM(NormalTrackRecord.duration), group_by_field). \
+        records_n = NormalTrackRecord.select(fn.SUM(NormalTrackRecord.duration).alias('duration'), group_by_field). \
             where((NormalTrackRecord.start_datetime >= start) & (NormalTrackRecord.start_datetime <= end)).join(
             Application).group_by(group_by_field).dicts()
-        records_w = WebTrackRecord.select(fn.SUM(WebTrackRecord.duration), group_by_field). \
+        records_w = WebTrackRecord.select(fn.SUM(WebTrackRecord.duration).alias('duration'), group_by_field). \
             where((WebTrackRecord.start_datetime >= start) & (WebTrackRecord.start_datetime <= end)).join(
             Application).group_by(group_by_field).dicts()
         rec_list = [r for r in records_n] + [r for r in records_w]
@@ -89,8 +89,9 @@ class TimeTracking(object):
         """
         get all web browsing records from start to end group by url's domain name
         """
-        records = WebTrackRecord.select(fn.SUM(WebTrackRecord.duration), fn.Substr(WebTrackRecord.url, 1, fn.Instr(
-            fn.Substr(WebTrackRecord.url, 9), '/') + 8).alias('domain')). \
+        records = WebTrackRecord.select(fn.SUM(WebTrackRecord.duration).alias('duration'),
+                                        fn.Substr(WebTrackRecord.url, 1, fn.Instr(
+                                            fn.Substr(WebTrackRecord.url, 9), '/') + 8).alias('domain')). \
             where((WebTrackRecord.start_datetime >= start) & (WebTrackRecord.start_datetime <= end)).join(
             Application).group_by(SQL('domain')).order_by(WebTrackRecord.duration.desc()).dicts()
         return records
@@ -148,7 +149,7 @@ class TimeTracking(object):
 
     @property
     def is_not_running(self):
-        return trackmac.cocoa.daemon_status(trackmac.config.TRACK_PLIST_NAME[:-6])
+        return trackmac.cocoa.daemon_status(trackmac.config.TRACK_PLIST_NAME[:-6].encode("utf8"))
 
 
 def main():
