@@ -41,7 +41,8 @@ First, create sqlite database and add .plist to keep trackmac run at startup
 With this command, a dbfile will be created under ~/Library/Application Support/com.macleek.github.trackmac/
 and com.macleek.github.trackmac.plist will be added to ~/Library/LaunchAgents/
 
-Now the trackmac will automatically start in the background
+Now the trackmac will automatically start in the background.
+
 Let's see what we can get via
 
 .. code:: bash
@@ -71,7 +72,7 @@ Web sites tracking
 	             https://www.v2ex.com/         15s   0.4%
 
 
-To see the data of last day, last week or last month, simply add -d, -w or -m respectively.
+To see the data of yesterday, current week or current month, simply add -d, -w or -m respectively.
 
 .. code:: bash
 
@@ -83,9 +84,7 @@ To see the data of last day, last week or last month, simply add -d, -w or -m re
 	         终端     01m 38s  ██████████ 33.8%
 	      PyCharm         03s   1.0%
 
-Full options here:
-
-Options:
+Full options here
 
 +------------------------+------------------------------------+--------------------------------+
 |:kbd:`-f, --from TEXT`  |The date from when the report should start.Format:%Y-%m-%d           |
@@ -114,7 +113,7 @@ If you do not want to track for some applications,just type
   $ tm block QQ
   Successfully blocked QQ.
 
-To remove from block list:
+and to remove from block list:
 
 .. code:: bash
 
@@ -199,10 +198,9 @@ Uninstallation
   $ pip uninstall trackmac
 
 
-Contributor Code of Conduct
----------------------------
+Known Issues
+~~~~~~~~~~~~
 
-If you want to contribute to this project, please read the project `Contributor Code of Conduct <https://tailordev.github.io/Watson/contributing/coc/>`_
 
 License
 -------
