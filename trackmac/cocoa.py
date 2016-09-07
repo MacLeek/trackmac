@@ -64,14 +64,14 @@ def _convert_str_to_nsstring(str_):
     """
     Python string to NSString
     """
-    return send(C('NSString'), S('stringWithUTF8String:'), ctypes.c_char_p(str_.encode('utf8')))
+    return send(C(b'NSString'), S(b'stringWithUTF8String:'), ctypes.c_char_p(str_))
 
 
 def _convert_nsstring_to_str(obj):
     """
     NSString to python string with utf8 encoded
     """
-    return ctypes.string_at(send(obj, S('UTF8String')))
+    return ctypes.string_at(send(obj, S(b'UTF8String')))
 
 
 # def _convert_str_to_cfstring(s):
@@ -95,12 +95,12 @@ class NSAutoreleasePool(object):
         self.drained = False
 
     def alloc(self):
-        pool = send(C('NSAutoreleasePool'), S('alloc'))
-        self.pool = send(pool, S('init'))
+        pool = send(C(b'NSAutoreleasePool'), S(b'alloc'))
+        self.pool = send(pool, S(b'init'))
 
     def drain(self):
         if self.pool and not self.drained:
-            send(self.pool, S('drain'))
+            send(self.pool, S(b'drain'))
             self.drained = True
 
     def __enter__(self):
@@ -117,10 +117,10 @@ def frontmost_application():
     """
     get the front most application(now deprecated by apple)
     """
-    ns_workspace = send(C('NSWorkspace'), S('sharedWorkspace'))
-    active_application = send(ns_workspace, S('activeApplication'))
-    ns_application_name = send(active_application, S('valueForKey:'),
-                               _convert_str_to_nsstring('NSApplicationName'))
+    ns_workspace = send(C(b'NSWorkspace'), S(b'sharedWorkspace'))
+    active_application = send(ns_workspace, S(b'activeApplication'))
+    ns_application_name = send(active_application, S(b'valueForKey:'),
+                               _convert_str_to_nsstring(b'NSApplicationName'))
     return _convert_nsstring_to_str(ns_application_name)
 
 
@@ -129,12 +129,12 @@ def current_tab(brower_name):
     get the current active tab
     """
     broswer_specifics = trackmac.config.BROWSERS[brower_name]
-    chrome = send(C('SBApplication'), S('applicationWithBundleIdentifier:'),
+    chrome = send(C(b'SBApplication'), S(b'applicationWithBundleIdentifier:'),
                   _convert_str_to_nsstring(broswer_specifics['bundle_id']))
-    windows = send(chrome, S('windows'))
-    count = send(windows, S('count'))
+    windows = send(chrome, S(b'windows'))
+    count = send(windows, S(b'count'))
     if count > 0:
-        front_window = send(windows, S('objectAtIndex:'), 0)
+        front_window = send(windows, S(b'objectAtIndex:'), 0)
         active_tab = send(front_window, S(broswer_specifics['tab']))
         title = _convert_nsstring_to_str(send(active_tab, S(broswer_specifics['title'])))
         url = _convert_nsstring_to_str(send(active_tab, S(broswer_specifics['url'])))
