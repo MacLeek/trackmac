@@ -23,7 +23,7 @@ setup(
     name='trackmac',
     version='0.0.1',
     description="A command-line tool to track application usage for OS X",
-    url='http://happylyang.com',
+    url='http://github.com/MacLeek/trackmac',
     author='MacLeek',
     author_email='inaoqi@gmail.com',
     packages=['trackmac'],
