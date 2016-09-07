@@ -199,7 +199,13 @@ Uninstallation
 
 
 Known Issues
-~~~~~~~~~~~~
+-----------
+
+When tracking web sites, python rocketship icon will appear in the dock.
+This has something to do with using ScripingBridge to track websites.
+
+Possible solutions:
+http://stackoverflow.com/questions/30768087/restricted-folder-files-in-os-x-el-capitan
 
 
 License
