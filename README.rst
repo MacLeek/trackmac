@@ -1,7 +1,7 @@
 Trackmac
 -----------
 
-Trackmac is a command line tool for built for OS X users to track the time spent
+Trackmac is a command line tool built for OS X users to track their time spent
 on every application.It can also track the websites you visited through
 Chrome or Safari(will add support for more browers soon) every day.
 
