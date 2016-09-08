@@ -1,6 +1,8 @@
 Trackmac
 -----------
 
+|PyPI Latest Version|
+
 Trackmac is a command line tool built for OS X users to track their time spent
 on every application.It can also track the websites you visited through
 Chrome or Safari(will add support for more browers soon) every day.
@@ -31,7 +33,7 @@ or
 
 Note:
 
-If you are using virtual environment to install, you should use `$VIRTUAL_ENV/bin/tm`
+If you are using virtual environment, you should use `$VIRTUAL_ENV/bin/tm`
 instead of `tm` or simply add it to your environment PATH.
 
 Usage
@@ -217,3 +219,4 @@ License
 -------
 MIT
 
+.. |PyPI Latest Version| image:: https://img.shields.io/pypi/v/trackmac.svg
