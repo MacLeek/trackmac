@@ -13,7 +13,7 @@ class PostInstallCommand(install):
         should generate plist file first
         """
         generate_plist(self.install_scripts)
-        install.do_egg_install(self)
+        install.run(self)
 
 
 def parse_requirements(requirements, ignore=('setuptools',)):
@@ -37,7 +37,7 @@ def parse_requirements(requirements, ignore=('setuptools',)):
 
 setup(
     name='trackmac',
-    version='0.0.1',
+    version='0.0.3',
     description="A command-line tool to track application usage for OS X",
     url='http://github.com/MacLeek/trackmac',
     author='MacLeek',
