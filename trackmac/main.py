@@ -43,7 +43,7 @@ def cli(ctx):
 @click.pass_context
 def setup(ctx):
     """
-    Unload the track daemon mannualy.
+    setup the track all necessary files.
     """
     trackmac.utils.create_dir()
     trackmac.utils.create_database()
@@ -63,8 +63,9 @@ def abort_if_false(ctx, param, value):
 @click.pass_context
 def drop(ctx):
     """
-    Unload the track daemon mannualy.
+    delete the track all necessary files.
     """
+    trackmac.utils.load_or_unload_daemon('unload')
     trackmac.utils.remove_all_files()
     click.echo('Done.')
 

@@ -1,7 +1,7 @@
 from setuptools import setup
 from setuptools.command.install import install
 
-from trackmac.utils import generate_plist
+from trackmac.utils import generate_plist, create_dir
 from trackmac.config import TRACK_SCRIPT, TRACK_DAEMON
 
 
@@ -12,7 +12,8 @@ class PostInstallCommand(install):
         """
         should generate plist file first
         """
-        generate_plist(self.install_scripts)
+        create_dir()
+        generate_plist(self.install_base)
         install.run(self)
 
 
@@ -37,7 +38,7 @@ def parse_requirements(requirements, ignore=('setuptools',)):
 
 setup(
     name='trackmac',
-    version='0.0.3',
+    version='0.0.4',
     description="A command-line tool to track application usage for OS X",
     url='http://github.com/MacLeek/trackmac',
     author='MacLeek',

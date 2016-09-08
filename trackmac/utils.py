@@ -8,12 +8,12 @@ from subprocess import Popen, PIPE
 import trackmac.config
 
 
-def generate_plist(install_scripts_dir):
+def generate_plist(install_base_dir):
     """
     generate a plist file under current folder
     """
     cur_dir = os.path.abspath(os.path.dirname(__file__))
-    plist_file = os.path.join(cur_dir, trackmac.config.TRACK_PLIST_NAME)
+    plist_file = os.path.join(trackmac.config.TRACK_DIR, trackmac.config.TRACK_PLIST_NAME)
     with open(plist_file, 'w') as f:
         f.write("<?xml version=""1.0"" encoding=""UTF-8""?>\n")
         f.write("<!DOCTYPE plist PUBLIC ""-//Apple//DTD PLIST 1.0//EN"" ""http://www.apple.com/DTDs/PropertyList-1.0.dtd"">\n")
@@ -23,7 +23,7 @@ def generate_plist(install_scripts_dir):
         f.write("        <string>{}</string>\n".format(trackmac.config.TRACK_PLIST_NAME[:-6]))
         f.write("        <key>ProgramArguments</key>\n")
         f.write("        <array>\n")
-        f.write("        <string>{}/{}</string>\n".format(install_scripts_dir, trackmac.config.TRACK_DAEMON))
+        f.write("        <string>{}/bin/{}</string>\n".format(install_base_dir, trackmac.config.TRACK_DAEMON))
         f.write("        </array>\n")
         f.write("        <key>KeepAlive</key>\n")
         f.write("        <true/>\n")
@@ -91,8 +91,7 @@ def symlink_and_load_plist():
     """
     symlink plist and load at once.
     """
-    cur_dir = os.path.abspath(os.path.dirname(__file__))
-    src = os.path.join(cur_dir, trackmac.config.TRACK_PLIST_NAME)
+    src = os.path.join(trackmac.config.TRACK_DIR, trackmac.config.TRACK_PLIST_NAME)
     dest = os.path.join(trackmac.config.USER_LAUNCHAGENTS_DIR, trackmac.config.TRACK_PLIST_NAME)
     try:
         os.symlink(src, dest)
