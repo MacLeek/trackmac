@@ -119,9 +119,12 @@ def frontmost_application():
     """
     ns_workspace = send(C(b'NSWorkspace'), S(b'sharedWorkspace'))
     active_application = send(ns_workspace, S(b'activeApplication'))
-    ns_application_name = send(active_application, S(b'valueForKey:'),
+    ns_application_name_obj = send(active_application, S(b'valueForKey:'),
                                _convert_str_to_nsstring(b'NSApplicationName'))
-    return _convert_nsstring_to_str(ns_application_name)
+    if ns_application_name_obj:
+        return _convert_nsstring_to_str(ns_application_name_obj)
+    else:
+        return None
 
 
 def current_tab(brower_name):
