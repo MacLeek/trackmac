@@ -136,11 +136,14 @@ def current_tab(brower_name):
     if count > 0:
         front_window = send(windows, S(b'objectAtIndex:'), 0)
         active_tab = send(front_window, S(broswer_specifics['tab']))
-        title = _convert_nsstring_to_str(send(active_tab, S(broswer_specifics['title'])))
-        url = _convert_nsstring_to_str(send(active_tab, S(broswer_specifics['url'])))
-        return title, url
-    else:
-        return None, None
+        title_obj = send(active_tab, S(broswer_specifics['title']))
+        url_obj = send(active_tab, S(broswer_specifics['url']))
+        # must check title and url is not none!
+        if title_obj and url_obj:
+            title = _convert_nsstring_to_str(title_obj)
+            url = _convert_nsstring_to_str(url_obj)
+            return title, url
+    return None, None
 
 
 def daemon_status(label):
