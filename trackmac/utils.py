@@ -23,7 +23,7 @@ def generate_plist(install_base_dir):
         f.write("        <string>{}</string>\n".format(trackmac.config.TRACK_PLIST_NAME[:-6]))
         f.write("        <key>ProgramArguments</key>\n")
         f.write("        <array>\n")
-        f.write("        <string>{}/bin/{}</string>\n".format(install_base_dir, trackmac.config.TRACK_DAEMON))
+        f.write("        <string>{}/{}</string>\n".format(install_base_dir, trackmac.config.TRACK_DAEMON))
         f.write("        </array>\n")
         f.write("        <key>KeepAlive</key>\n")
         f.write("        <true/>\n")

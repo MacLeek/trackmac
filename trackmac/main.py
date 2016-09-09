@@ -6,6 +6,7 @@ from datetime import datetime, date, timedelta
 import click
 
 import trackmac.app
+import trackmac.config
 import trackmac.utils
 
 
@@ -33,7 +34,7 @@ _SHORTCUT_OPTIONS = ['month', 'week', 'day']
 
 
 @click.group()
-@click.version_option(version="0.0.1", prog_name='Trackmac')
+@click.version_option(version=trackmac.config.VERSION, prog_name='Trackmac')
 @click.pass_context
 def cli(ctx):
     ctx.obj = trackmac.app.TimeTracking()
