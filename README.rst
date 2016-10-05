@@ -179,9 +179,9 @@ Manually start or stop trackmac,
 .. code:: bash
 
   $ tm start
-  trackmac daemon unloaded.
-  $ tm stop
   trackmac daemon loaded.
+  $ tm stop
+  trackmac daemon unloaded.
 
 
 To list all available commands, use
